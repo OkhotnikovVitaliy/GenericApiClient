@@ -15,7 +15,7 @@ public class Controller {
 
     private static JokeApi jokeApi;
     MainActivity view;
-    private List<Model> posts = new ArrayList<>();
+    private List<JokeModel> posts = new ArrayList<>();
 
     public Controller(MainActivity view) {
         this.view = view;
@@ -25,15 +25,15 @@ public class Controller {
     public void initData() {
 
         jokeApi = App.getApi();
-        jokeApi.getData().enqueue(new Callback<List<Model>>() {
+        jokeApi.getData().enqueue(new Callback<List<JokeModel>>() {
             @Override
-            public void onResponse(Call<List<Model>> call, Response<List<Model>> response) {
+            public void onResponse(Call<List<JokeModel>> call, Response<List<JokeModel>> response) {
                 posts.addAll(response.body());
                 view.recyclerView.getAdapter().notifyDataSetChanged();
             }
 
             @Override
-            public void onFailure(Call<List<Model>> call, Throwable t) {
+            public void onFailure(Call<List<JokeModel>> call, Throwable t) {
                 Toast.makeText(view, "An error occurred during networking", Toast.LENGTH_SHORT).show();
             }
         });
@@ -41,16 +41,16 @@ public class Controller {
             @Override
             public void onClick(View v) {
                 posts.clear();
-                jokeApi.getData().enqueue(new Callback<List<Model>>() {
+                jokeApi.getData().enqueue(new Callback<List<JokeModel>>() {
                     @Override
-                    public void onResponse(Call<List<Model>> call, Response<List<Model>> response) {
+                    public void onResponse(Call<List<JokeModel>> call, Response<List<JokeModel>> response) {
                         posts.addAll(response.body());
                         view.recyclerView.getAdapter().notifyDataSetChanged();
                         view.recyclerView.smoothScrollToPosition(0);
                     }
 
                     @Override
-                    public void onFailure(Call<List<Model>> call, Throwable t) {
+                    public void onFailure(Call<List<JokeModel>> call, Throwable t) {
                         Toast.makeText(view, "An error occurred during networking", Toast.LENGTH_SHORT).show();
                     }
                 });
@@ -61,7 +61,7 @@ public class Controller {
         view.showRecyclerList();
     }
 
-    public List<Model> getMyJoke() {
+    public List<JokeModel> getMyJoke() {
         return posts;
     }
 }

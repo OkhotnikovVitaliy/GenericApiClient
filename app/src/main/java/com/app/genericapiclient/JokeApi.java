@@ -7,6 +7,6 @@ import retrofit2.http.GET;
 
 public interface JokeApi {
     @GET("/random_ten")
-    Call<List<Model>> getData();
+    Call<List<JokeModel>> getData();
 
 }

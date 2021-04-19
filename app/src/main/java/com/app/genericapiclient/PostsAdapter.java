@@ -14,9 +14,9 @@ import java.util.List;
 
 public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> {
 
-    private List<Model> posts;
+    private List<JokeModel> posts;
 
-    public PostsAdapter(List<Model> posts) {
+    public PostsAdapter(List<JokeModel> posts) {
         this.posts = posts;
     }
 
@@ -28,7 +28,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Model post = posts.get(position);
+        JokeModel post = posts.get(position);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             holder.post.setText(Html.fromHtml(post.getSetup(), Html.FROM_HTML_MODE_LEGACY));
         } else {
